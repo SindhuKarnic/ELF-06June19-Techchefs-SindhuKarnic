@@ -1,0 +1,7 @@
+package com.techchefs.javaapp.inheritance;
+
+public class Son extends Father{
+	void bike() {
+		System.out.println("modified bike");
+	}
+}
