@@ -1,0 +1,29 @@
+1)	select * from employee
+	where deptNo = 20;
+
+2)	select * from employee
+	where salary > 25000
+
+3) 	select * from employee
+	where jobType = 'software developer';
+
+4)	select * from employee
+	where deptno in (10,20,40);
+
+5) 	select * from employee
+	where name like 's%';
+
+6)	select * from employee
+	where fname like '_l%';
+
+7)	select * from employee
+	where fname like '%a%a%';
+
+8)	select * from employee
+	where lname like '%e_';
+
+9)	select * from employee
+	where lname like '______';
+	
+10)	select * from employee
+	where salary between 20000 and 30000;

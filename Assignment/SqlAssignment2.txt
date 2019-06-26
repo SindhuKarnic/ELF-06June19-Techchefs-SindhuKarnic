@@ -1,0 +1,29 @@
+1) WAQ to display all the details of the software developer in dept 10.
+select * from employee where job = 'softwar developer' and deptNo = 30
+
+2) WAQ to display the lisy for all the s/w developer in dept number 40 and having salary greater than 5000 
+select * from employee where job = 'softwar developer' and deptNo = 40 and salary > 5000
+
+3) WAQ to display list all the emp except those who are working in dept 10 and 20
+select * from employee where deptNo not in (10, 20)
+
+4) WAQ to display list the emp who are not working as s/w developer and clerks in dept 10 and 20 with a salary in the rang of 1000 to 3000
+select * from employee where job not in ('softwar developer', 'clerk') and deptNo in (10, 20) and salary between 1000 and 3000
+
+5) WAQ to display the list of emp whose salary is not in the range of 1000 to 20000 in dept 10,20,30 except all salesmen 
+select * from employee where salary not between 10000 and 20000 and deptNo in (10,20,30) and job != 'salesman'
+
+6) WAQ to arrange all the emp by their salary in descending order. 
+select * from employee order by salary desc
+
+7) WAQ to display the max salary ,min salary and total salary from emp 
+select max(salary) as max, min(salary) as min, sum(salary) as total from employee
+
+8) WAQ to display the list of the number of s/w developer in dept 20
+select count(*) from employee where job = 'softwar developer' and deptNo = 20
+
+9) WAQ to display the list of highest and lowest salary earned by salesmen. 
+select max(salary) as highest, min(salary) as lowest from employee where job = 'salesman'
+
+10) WAQ to display the total salary of all dept
+select max(salary) as total from employee group by deptNo
