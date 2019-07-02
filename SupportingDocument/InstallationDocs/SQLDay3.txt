@@ -1,0 +1,278 @@
+Scalar function
+
+mysql> select upper(fname) from employee;
++--------------+
+| upper(fname) |
++--------------+
+| ABC          |
+| BCD          |
+| CDE          |
+| DEF          |
+| EFG          |
+| BCD          |
+| ADBHHFDHFN   |
++--------------+
+7 rows in set (0.11 sec)
+
+mysql> select upper(fname) as fname, upper(lname) as lname from employee;
++------------+-----------+
+| fname      | lname     |
++------------+-----------+
+| ABC        | XYZ       |
+| BCD        | XYZ       |
+| CDE        | XYZC      |
+| DEF        | XYZTC     |
+| EFG        | XYZTTC    |
+| BCD        | XYZ       |
+| ADBHHFDHFN | HJDBHJDGS |
++------------+-----------+
+7 rows in set (0.00 sec)
+mysql> select lower(fname) as fname from employee;
++------------+
+| fname      |
++------------+
+| abc        |
+| bcd        |
+| cde        |
+| def        |
+| efg        |
+| bcd        |
+| adbhhfdhfn |
++------------+
+7 rows in set (0.05 sec)
+
+mysql> select length(fname) as fname from employee;
++-------+
+| fname |
++-------+
+|     3 |
+|     3 |
+|     3 |
+|     3 |
+|     3 |
+|     3 |
+|    10 |
++-------+
+7 rows in set (0.06 sec)
+
+mysql> select reverse(fname) as fname from employee;
++------------+
+| fname      |
++------------+
+| cba        |
+| dcb        |
+| edc        |
+| fed        |
+| gfe        |
+| dcb        |
+| nfhdfhhbda |
++------------+
+7 rows in set (0.01 sec)
+
+mysql> select concat(fname,lname) as fname from employee;
++---------------------+
+| fname               |
++---------------------+
+| abcxyz              |
+| bcdxyz              |
+| cdexyzc             |
+| defxyztc            |
+| efgxyzttc           |
+| bcdxyz              |
+| adbhhfdhfnhjdbhjdgs |
++---------------------+
+7 rows in set (0.08 sec)
+
+-----------substr(string, startPosition, endPosition)
+mysql> select substr(jobType, 2,5) from employee;
++----------------------+
+| substr(jobType, 2,5) |
++----------------------+
+| aaaaa                |
+| aaaaa                |
+| aaagg                |
+| ayaag                |
+| ayaua                |
+| NULL                 |
+| dfhdf                |
++----------------------+
+7 rows in set (0.00 sec)
+
+---------------select instr(column_name, 'string') from table_nme
+---------------gives the position of the string, if not present it gives zero.
+mysql> select instr(jobType, 'ggg') from employee;
++-----------------------+
+| instr(jobType, 'ggg') |
++-----------------------+
+|                     0 |
+|                     7 |
+|                     9 |
+|                    10 |
+|                    11 |
+|                  NULL |
+|                     0 |
++-----------------------+
+7 rows in set (0.06 sec)
+
+----------------------------------------------Transaction control language(TCL)
+Commit
+Rollback
+SavePoint
+
+By default all statements are commited, to change it use 
+mysql> set autocommit =0;
+Query OK, 0 rows affected (0.09 sec)
+
+delete a row and rollback, the changes will be reverted.
+
+
+------------------------Rollback----------------------------------
+mysql> select * from employee;
++----+------------+-----------+--------+----------------+-------+------------------+
+| id | fname      | lname     | salary | jobType        | depNo | email            |
++----+------------+-----------+--------+----------------+-------+------------------+
+|  1 | abc        | xyz       |  20000 | aaaaaaaaa      |     2 | abc@mail.com     |
+|  2 | bcd        | xyz       |  25000 | aaaaaaggga     |     2 | bcd@mail.com     |
+|  3 | cde        | xyzc      |  25000 | aaaaggaaggga   |     1 | cde@mail.com     |
+|  4 | def        | xyztc     |  35000 | aayaaggaaggga  |     1 | def@mail.com     |
+|  5 | efg        | xyzttc    |  15000 | aayauaggaaggga |     1 | efg@mail.com     |
+|  7 | bcd        | xyz       |  20000 | NULL           |     2 | NULL             |
+|  8 | adbhhfdhfn | hjdbhjdgs |  30000 | udfhdfjdhf     |     3 | ajhdjhn@mail.com |
++----+------------+-----------+--------+----------------+-------+------------------+
+7 rows in set (0.05 sec)
+
+mysql> delete from employee where id = 5;
+Query OK, 1 row affected (0.16 sec)
+
+mysql> select * from employee;
++----+------------+-----------+--------+---------------+-------+------------------+
+| id | fname      | lname     | salary | jobType       | depNo | email            |
++----+------------+-----------+--------+---------------+-------+------------------+
+|  1 | abc        | xyz       |  20000 | aaaaaaaaa     |     2 | abc@mail.com     |
+|  2 | bcd        | xyz       |  25000 | aaaaaaggga    |     2 | bcd@mail.com     |
+|  3 | cde        | xyzc      |  25000 | aaaaggaaggga  |     1 | cde@mail.com     |
+|  4 | def        | xyztc     |  35000 | aayaaggaaggga |     1 | def@mail.com     |
+|  7 | bcd        | xyz       |  20000 | NULL          |     2 | NULL             |
+|  8 | adbhhfdhfn | hjdbhjdgs |  30000 | udfhdfjdhf    |     3 | ajhdjhn@mail.com |
++----+------------+-----------+--------+---------------+-------+------------------+
+6 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> select * from employee;
++----+------------+-----------+--------+----------------+-------+------------------+
+| id | fname      | lname     | salary | jobType        | depNo | email            |
++----+------------+-----------+--------+----------------+-------+------------------+
+|  1 | abc        | xyz       |  20000 | aaaaaaaaa      |     2 | abc@mail.com     |
+|  2 | bcd        | xyz       |  25000 | aaaaaaggga     |     2 | bcd@mail.com     |
+|  3 | cde        | xyzc      |  25000 | aaaaggaaggga   |     1 | cde@mail.com     |
+|  4 | def        | xyztc     |  35000 | aayaaggaaggga  |     1 | def@mail.com     |
+|  5 | efg        | xyzttc    |  15000 | aayauaggaaggga |     1 | efg@mail.com     |
+|  7 | bcd        | xyz       |  20000 | NULL           |     2 | NULL             |
+|  8 | adbhhfdhfn | hjdbhjdgs |  30000 | udfhdfjdhf     |     3 | ajhdjhn@mail.com |
++----+------------+-----------+--------+----------------+-------+------------------+
+7 rows in set (0.00 sec)
+
+----------------------------------------------------Commit---------------------
+To save changes, after commit rollback doesnt work
+mysql> commit;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> select * from employee;
++----+------------+-----------+--------+----------------+-------+------------------+
+| id | fname      | lname     | salary | jobType        | depNo | email            |
++----+------------+-----------+--------+----------------+-------+------------------+
+|  1 | abc        | xyz       |  20000 | aaaaaaaaa      |     2 | abc@mail.com     |
+|  2 | bcd        | xyz       |  25000 | aaaaaaggga     |     2 | bcd@mail.com     |
+|  3 | cde        | xyzc      |  25000 | aaaaggaaggga   |     1 | cde@mail.com     |
+|  4 | def        | xyztc     |  35000 | aayaaggaaggga  |     1 | def@mail.com     |
+|  5 | efg        | xyzttc    |  15000 | aayauaggaaggga |     1 | efg@mail.com     |
+|  7 | bcd        | xyz       |  20000 | NULL           |     2 | NULL             |
+|  8 | adbhhfdhfn | hjdbhjdgs |  30000 | udfhdfjdhf     |     3 | ajhdjhn@mail.com |
+|  9 | ssss       | kkkk      |  20000 | hghsdf         |     3 | sk@mail.com      |
++----+------------+-----------+--------+----------------+-------+------------------+
+8 rows in set (0.05 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from employee;
++----+------------+-----------+--------+----------------+-------+------------------+
+| id | fname      | lname     | salary | jobType        | depNo | email            |
++----+------------+-----------+--------+----------------+-------+------------------+
+|  1 | abc        | xyz       |  20000 | aaaaaaaaa      |     2 | abc@mail.com     |
+|  2 | bcd        | xyz       |  25000 | aaaaaaggga     |     2 | bcd@mail.com     |
+|  3 | cde        | xyzc      |  25000 | aaaaggaaggga   |     1 | cde@mail.com     |
+|  4 | def        | xyztc     |  35000 | aayaaggaaggga  |     1 | def@mail.com     |
+|  5 | efg        | xyzttc    |  15000 | aayauaggaaggga |     1 | efg@mail.com     |
+|  7 | bcd        | xyz       |  20000 | NULL           |     2 | NULL             |
+|  8 | adbhhfdhfn | hjdbhjdgs |  30000 | udfhdfjdhf     |     3 | ajhdjhn@mail.com |
+|  9 | ssss       | kkkk      |  20000 | hghsdf         |     3 | sk@mail.com      |
++----+------------+-----------+--------+----------------+-------+------------------+
+8 rows in set (0.00 sec)
+
+--------------------------------------------------Savepoint
+
+Saves the current state with all the changes made so far, a name is given to this state. using that name we can restore to that state. using rollback
+
+mysql> savepoint a;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> insert into employee values(10,'ssjfvfbvhjss','kkkk',20000,'hghsdf',3,'sk@mail.com');
+Query OK, 1 row affected (0.31 sec)
+
+mysql> savepoint b;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from employee;
++----+--------------+-----------+--------+----------------+-------+------------------+
+| id | fname        | lname     | salary | jobType        | depNo | email            |
++----+--------------+-----------+--------+----------------+-------+------------------+
+|  1 | abc          | xyz       |  20000 | aaaaaaaaa      |     2 | abc@mail.com     |
+|  2 | bcd          | xyz       |  25000 | aaaaaaggga     |     2 | bcd@mail.com     |
+|  3 | cde          | xyzc      |  25000 | aaaaggaaggga   |     1 | cde@mail.com     |
+|  4 | def          | xyztc     |  35000 | aayaaggaaggga  |     1 | def@mail.com     |
+|  5 | efg          | xyzttc    |  15000 | aayauaggaaggga |     1 | efg@mail.com     |
+|  7 | bcd          | xyz       |  20000 | NULL           |     2 | NULL             |
+|  8 | adbhhfdhfn   | hjdbhjdgs |  30000 | udfhdfjdhf     |     3 | ajhdjhn@mail.com |
+|  9 | ssss         | kkkk      |  20000 | hghsdf         |     3 | sk@mail.com      |
+| 10 | ssjfvfbvhjss | kkkk      |  20000 | hghsdf         |     3 | sk@mail.com      |
++----+--------------+-----------+--------+----------------+-------+------------------+
+9 rows in set (0.00 sec)
+
+mysql> delete from employee where id =9;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employee;
++----+--------------+-----------+--------+----------------+-------+------------------+
+| id | fname        | lname     | salary | jobType        | depNo | email            |
++----+--------------+-----------+--------+----------------+-------+------------------+
+|  1 | abc          | xyz       |  20000 | aaaaaaaaa      |     2 | abc@mail.com     |
+|  2 | bcd          | xyz       |  25000 | aaaaaaggga     |     2 | bcd@mail.com     |
+|  3 | cde          | xyzc      |  25000 | aaaaggaaggga   |     1 | cde@mail.com     |
+|  4 | def          | xyztc     |  35000 | aayaaggaaggga  |     1 | def@mail.com     |
+|  5 | efg          | xyzttc    |  15000 | aayauaggaaggga |     1 | efg@mail.com     |
+|  7 | bcd          | xyz       |  20000 | NULL           |     2 | NULL             |
+|  8 | adbhhfdhfn   | hjdbhjdgs |  30000 | udfhdfjdhf     |     3 | ajhdjhn@mail.com |
+| 10 | ssjfvfbvhjss | kkkk      |  20000 | hghsdf         |     3 | sk@mail.com      |
++----+--------------+-----------+--------+----------------+-------+------------------+
+8 rows in set (0.00 sec)
+
+--------------Using rollback to restore to savepoint a
+mysql> rollback to a;
+Query OK, 0 rows affected (0.06 sec)
+
+
+---------------------------Order by--------------
+select * from tab_name order by column_name asc/desc;
+
+
+--------------------------------------group by--------------
+groups rows with same values into summary rows.
+
+WAQ to display employees under same dept
+select * from employee group by deptNo;
+
+WAQ to dispaly max, avg salary according to dept
+select max(salary) as max, avg(salary)as avg, deptNo from employee group by deptNo;

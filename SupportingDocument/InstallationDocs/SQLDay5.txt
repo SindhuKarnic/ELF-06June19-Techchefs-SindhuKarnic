@@ -1,0 +1,74 @@
+-------------------------------Joins------------
+
+combination of two tables
+
+cross join-------------
+each row of one table is combined with each row of the second table
+select * from employee cross join department
+
+with alias------------
+select e.id,d.deptName from employee e cross join department d
+
+-------inner join-------
+returns rows that satisfy the condition
+select e.id,d.deptName from employee e cross join department d
+
+
+--------outer joins-------
+Left outer join------------
+all records from left table and matching record (according to condition) from right table
+select * from employee e  left join department d on e.deptNo = d.deptNo
+
+right outer join---------------
+all records from right table and matching recs from left
+
+select * from employee e  right join department d on e.deptNo = d.deptNo
+
+select e.firstName, e.salary, d.location from employee e inner join department d on e.deptNo = d.deptNo
+
+
+select e.firstName, d.deptName from employee e inner join department d on e.deptNo = d.deptNo where e.firstName like 'a%c'
+
+-----------------View-------------------
+like a virtual table, any changes made on it is reflected on main table
+
+create view view_name as (select * fromo tab_name)
+
+-----------------stored procedure---------------------
+--sql commands saved in db data dictonary n called from command line
+create procedure proc_name
+begin
+sql queries
+end
+
+called using
+call proc_name
+
+
+--Passing parameters to sp
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `company`.`SP1`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP1`(in ids int)
+BEGIN
+	select * from employee where Id = ids;
+    END$$
+
+DELIMITER ;
+
+call SP1(100)
+
+--more than one parameter
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `company`.`SP1`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP1`(in ids int, in nam varchar(20))
+BEGIN
+	select * from employee where Id = ids or firstname = nam;
+    END$$
+
+DELIMITER ;
+
+call SP1(101, 'abc')

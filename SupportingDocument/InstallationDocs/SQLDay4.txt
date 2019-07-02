@@ -1,0 +1,16 @@
+----------Sub queries-------------
+Query inside a query, first the inside query executes. and gives one row output.
+select * from employee where salary = (select max(salary) from employee)
+
+2nd max salary
+select max(salary) from employee where salary   != (select max(salary) from employee)
+
+If inner query gives more than one row output, use IN
+select emp according to dept
+select * from employee where deptNo in (select deptNo from employee group by deptNo)
+
+employee with max sal dept wise
+select firstName, lastName from employee where salary in (select max(salary) from employee group by deptNo)
+
+----------------copying rows of one table to another---
+insert into tab_name (select * from table)

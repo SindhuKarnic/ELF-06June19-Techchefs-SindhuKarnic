@@ -1,0 +1,239 @@
+--------------------Not in-------------------
+mysql> select * from employee where depNo not in(1, 3);
++----+-------+-------+--------+------------+-------+--------------+
+| id | fname | lname | salary | jobType    | depNo | email        |
++----+-------+-------+--------+------------+-------+--------------+
+|  1 | abc   | xyz   |  20000 | aaaaaaaaa  |     2 | abc@mail.com |
+|  2 | bcd   | xyz   |  25000 | aaaaaaggga |     2 | bcd@mail.com |
+|  7 | bcd   | xyz   |  20000 | NULL       |     2 | NULL         |
++----+-------+-------+--------+------------+-------+--------------+
+3 rows in set (0.00 sec)
+
+--------------------Not between--------------
+mysql> select * from employee where salary not between 10000 and 20000;
++----+-------+-------+--------+---------------+-------+--------------+
+| id | fname | lname | salary | jobType       | depNo | email        |
++----+-------+-------+--------+---------------+-------+--------------+
+|  2 | bcd   | xyz   |  25000 | aaaaaaggga    |     2 | bcd@mail.com |
+|  3 | cde   | xyzc  |  25000 | aaaaggaaggga  |     1 | cde@mail.com |
+|  4 | def   | xyztc |  35000 | aayaaggaaggga |     1 | def@mail.com |
++----+-------+-------+--------+---------------+-------+--------------+
+3 rows in set (0.00 sec)
+
+-----------------is null-------------------
+mysql> select * from employee where jobType is null;
++----+-------+-------+--------+---------+-------+-------+
+| id | fname | lname | salary | jobType | depNo | email |
++----+-------+-------+--------+---------+-------+-------+
+|  7 | bcd   | xyz   |  20000 | NULL    |     2 | NULL  |
++----+-------+-------+--------+---------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where jobType is not null;
++----+-------+--------+--------+----------------+-------+--------------+
+| id | fname | lname  | salary | jobType        | depNo | email        |
++----+-------+--------+--------+----------------+-------+--------------+
+|  1 | abc   | xyz    |  20000 | aaaaaaaaa      |     2 | abc@mail.com |
+|  2 | bcd   | xyz    |  25000 | aaaaaaggga     |     2 | bcd@mail.com |
+|  3 | cde   | xyzc   |  25000 | aaaaggaaggga   |     1 | cde@mail.com |
+|  4 | def   | xyztc  |  35000 | aayaaggaaggga  |     1 | def@mail.com |
+|  5 | efg   | xyzttc |  15000 | aayauaggaaggga |     1 | efg@mail.com |
++----+-------+--------+--------+----------------+-------+--------------+
+5 rows in set (0.00 sec)
+
+-----------------Like------------------
+mysql> select * from employee where fname like 'a%';
++----+-------+-------+--------+-----------+-------+--------------+
+| id | fname | lname | salary | jobType   | depNo | email        |
++----+-------+-------+--------+-----------+-------+--------------+
+|  1 | abc   | xyz   |  20000 | aaaaaaaaa |     2 | abc@mail.com |
++----+-------+-------+--------+-----------+-------+--------------+
+1 row in set (0.05 sec)
+
+mysql> select * from employee where fname like '%a%';
++----+-------+-------+--------+-----------+-------+--------------+
+| id | fname | lname | salary | jobType   | depNo | email        |
++----+-------+-------+--------+-----------+-------+--------------+
+|  1 | abc   | xyz   |  20000 | aaaaaaaaa |     2 | abc@mail.com |
++----+-------+-------+--------+-----------+-------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where lname like '%z%';
++----+-------+--------+--------+----------------+-------+--------------+
+| id | fname | lname  | salary | jobType        | depNo | email        |
++----+-------+--------+--------+----------------+-------+--------------+
+|  1 | abc   | xyz    |  20000 | aaaaaaaaa      |     2 | abc@mail.com |
+|  2 | bcd   | xyz    |  25000 | aaaaaaggga     |     2 | bcd@mail.com |
+|  3 | cde   | xyzc   |  25000 | aaaaggaaggga   |     1 | cde@mail.com |
+|  4 | def   | xyztc  |  35000 | aayaaggaaggga  |     1 | def@mail.com |
+|  5 | efg   | xyzttc |  15000 | aayauaggaaggga |     1 | efg@mail.com |
+|  7 | bcd   | xyz    |  20000 | NULL           |     2 | NULL         |
++----+-------+--------+--------+----------------+-------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where lname like '_yz';
++----+-------+-------+--------+------------+-------+--------------+
+| id | fname | lname | salary | jobType    | depNo | email        |
++----+-------+-------+--------+------------+-------+--------------+
+|  1 | abc   | xyz   |  20000 | aaaaaaaaa  |     2 | abc@mail.com |
+|  2 | bcd   | xyz   |  25000 | aaaaaaggga |     2 | bcd@mail.com |
+|  7 | bcd   | xyz   |  20000 | NULL       |     2 | NULL         |
++----+-------+-------+--------+------------+-------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where lname like 'xy%';
++----+-------+--------+--------+----------------+-------+--------------+
+| id | fname | lname  | salary | jobType        | depNo | email        |
++----+-------+--------+--------+----------------+-------+--------------+
+|  1 | abc   | xyz    |  20000 | aaaaaaaaa      |     2 | abc@mail.com |
+|  2 | bcd   | xyz    |  25000 | aaaaaaggga     |     2 | bcd@mail.com |
+|  3 | cde   | xyzc   |  25000 | aaaaggaaggga   |     1 | cde@mail.com |
+|  4 | def   | xyztc  |  35000 | aayaaggaaggga  |     1 | def@mail.com |
+|  5 | efg   | xyzttc |  15000 | aayauaggaaggga |     1 | efg@mail.com |
+|  7 | bcd   | xyz    |  20000 | NULL           |     2 | NULL         |
++----+-------+--------+--------+----------------+-------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where lname like 'xy_';
++----+-------+-------+--------+------------+-------+--------------+
+| id | fname | lname | salary | jobType    | depNo | email        |
++----+-------+-------+--------+------------+-------+--------------+
+|  1 | abc   | xyz   |  20000 | aaaaaaaaa  |     2 | abc@mail.com |
+|  2 | bcd   | xyz   |  25000 | aaaaaaggga |     2 | bcd@mail.com |
+|  7 | bcd   | xyz   |  20000 | NULL       |     2 | NULL         |
++----+-------+-------+--------+------------+-------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where  jobType like '%a%a%';
++----+-------+--------+--------+----------------+-------+--------------+
+| id | fname | lname  | salary | jobType        | depNo | email        |
++----+-------+--------+--------+----------------+-------+--------------+
+|  1 | abc   | xyz    |  20000 | aaaaaaaaa      |     2 | abc@mail.com |
+|  2 | bcd   | xyz    |  25000 | aaaaaaggga     |     2 | bcd@mail.com |
+|  3 | cde   | xyzc   |  25000 | aaaaggaaggga   |     1 | cde@mail.com |
+|  4 | def   | xyztc  |  35000 | aayaaggaaggga  |     1 | def@mail.com |
+|  5 | efg   | xyzttc |  15000 | aayauaggaaggga |     1 | efg@mail.com |
++----+-------+--------+--------+----------------+-------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into employee values(8, 'adbhhfdhfn', 'hjdbhjdgs', 30000, 'udfhdfjdhf', 3, 'ajhdjhn@mail.com');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from employee;
++----+------------+-----------+--------+----------------+-------+------------------+
+| id | fname      | lname     | salary | jobType        | depNo | email            |
++----+------------+-----------+--------+----------------+-------+------------------+
+|  1 | abc        | xyz       |  20000 | aaaaaaaaa      |     2 | abc@mail.com     |
+|  2 | bcd        | xyz       |  25000 | aaaaaaggga     |     2 | bcd@mail.com     |
+|  3 | cde        | xyzc      |  25000 | aaaaggaaggga   |     1 | cde@mail.com     |
+|  4 | def        | xyztc     |  35000 | aayaaggaaggga  |     1 | def@mail.com     |
+|  5 | efg        | xyzttc    |  15000 | aayauaggaaggga |     1 | efg@mail.com     |
+|  7 | bcd        | xyz       |  20000 | NULL           |     2 | NULL             |
+|  8 | adbhhfdhfn | hjdbhjdgs |  30000 | udfhdfjdhf     |     3 | ajhdjhn@mail.com |
++----+------------+-----------+--------+----------------+-------+------------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employee where fname like 'a%n';
++----+------------+-----------+--------+------------+-------+------------------+
+| id | fname      | lname     | salary | jobType    | depNo | email            |
++----+------------+-----------+--------+------------+-------+------------------+
+|  8 | adbhhfdhfn | hjdbhjdgs |  30000 | udfhdfjdhf |     3 | ajhdjhn@mail.com |
++----+------------+-----------+--------+------------+-------+------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where fname like 'a%' or fname like 'd%';
++----+------------+-----------+--------+---------------+-------+------------------+
+| id | fname      | lname     | salary | jobType       | depNo | email            |
++----+------------+-----------+--------+---------------+-------+------------------+
+|  1 | abc        | xyz       |  20000 | aaaaaaaaa     |     2 | abc@mail.com     |
+|  4 | def        | xyztc     |  35000 | aayaaggaaggga |     1 | def@mail.com     |
+|  8 | adbhhfdhfn | hjdbhjdgs |  30000 | udfhdfjdhf    |     3 | ajhdjhn@mail.com |
++----+------------+-----------+--------+---------------+-------+------------------+
+3 rows in set (0.00 sec)
+mysql> select * from employee where fname like '___%';
++----+------------+-----------+--------+----------------+-------+------------------+
+| id | fname      | lname     | salary | jobType        | depNo | email            |
++----+------------+-----------+--------+----------------+-------+------------------+
+|  1 | abc        | xyz       |  20000 | aaaaaaaaa      |     2 | abc@mail.com     |
+|  2 | bcd        | xyz       |  25000 | aaaaaaggga     |     2 | bcd@mail.com     |
+|  3 | cde        | xyzc      |  25000 | aaaaggaaggga   |     1 | cde@mail.com     |
+|  4 | def        | xyztc     |  35000 | aayaaggaaggga  |     1 | def@mail.com     |
+|  5 | efg        | xyzttc    |  15000 | aayauaggaaggga |     1 | efg@mail.com     |
+|  7 | bcd        | xyz       |  20000 | NULL           |     2 | NULL             |
+|  8 | adbhhfdhfn | hjdbhjdgs |  30000 | udfhdfjdhf     |     3 | ajhdjhn@mail.com |
++----+------------+-----------+--------+----------------+-------+------------------+
+7 rows in set (0.00 sec)
+mysql> select * from employee where fname not like 'a%';
++----+-------+--------+--------+----------------+-------+--------------+
+| id | fname | lname  | salary | jobType        | depNo | email        |
++----+-------+--------+--------+----------------+-------+--------------+
+|  2 | bcd   | xyz    |  25000 | aaaaaaggga     |     2 | bcd@mail.com |
+|  3 | cde   | xyzc   |  25000 | aaaaggaaggga   |     1 | cde@mail.com |
+|  4 | def   | xyztc  |  35000 | aayaaggaaggga  |     1 | def@mail.com |
+|  5 | efg   | xyzttc |  15000 | aayauaggaaggga |     1 | efg@mail.com |
+|  7 | bcd   | xyz    |  20000 | NULL           |     2 | NULL         |
++----+-------+--------+--------+----------------+-------+--------------+
+5 rows in set (0.00 sec)
+
+Aggregate function------------------------------------
+mysql> select avg(salary) as average from employee;
++------------+
+| average    |
++------------+
+| 24285.7143 |
++------------+
+1 row in set (0.09 sec)
+
+mysql> select max(salary) as max from employee;
++-------+
+| max   |
++-------+
+| 35000 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) as min from employee;
++-------+
+| min   |
++-------+
+| 15000 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) as min from employee;
++-------+
+| min   |
++-------+
+| 15000 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select sum(salary) as sum from employee;
++--------+
+| sum    |
++--------+
+| 170000 |
++--------+
+1 row in set (0.00 sec)
+mysql> select count(*) from employee;
++----------+
+| count(*) |
++----------+
+|        7 |
++----------+
+1 row in set (0.00 sec)
+mysql> select count(*) as count, sum(salary) as sal from employee where salary < 20000;
++-------+-------+
+| count | sal   |
++-------+-------+
+|     1 | 15000 |
++-------+-------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) as avgSal, max(salary) as maxSal from employee where depNo = 2;
++------------+--------+
+| avgSal     | maxSal |
++------------+--------+
+| 21666.6667 |  25000 |
++------------+--------+
+1 row in set (0.00 sec)

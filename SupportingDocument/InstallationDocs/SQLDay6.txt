@@ -1,0 +1,18 @@
+----------------Trigger--------------
+
+like stored proc which automatically invokes when a spl event occurs in db
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `company`.`trigger1` BEFORE INSERT
+    ON `company`.`employee`
+    FOR EACH ROW BEGIN
+	insert into emp2 value(new.id,new.firstName,new.salary);
+    END$$
+
+
+Before: before inserting into first table, does the trigger operation
+After: after inserting into first table, does the trigger operation
+
+old: takes old values from the table and copies to new table
+new: takes new values from the table and copies to new table
