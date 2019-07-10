@@ -10,7 +10,7 @@ public class EmployeeDAOFactory {
 		if(dbInteractionType.equals("jdbc")) {
 			dao = new EmployeeDAOJDBCmpl();
 		} else if (dbInteractionType.equals("hibernate")) {
-			dao = new EmployeeDAOHibernateImpl2();
+			dao = new EmployeeDAOHibernateImpl();
 		}
 		return dao;
 	}

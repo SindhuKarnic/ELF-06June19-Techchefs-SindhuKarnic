@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.techchefs.designpattern.beans.EmployeeInfoBean;
 import com.techchefs.designpattern.dao.EmployeeDAO;
@@ -38,25 +39,24 @@ public class DesignPatternsTest {
 	public static void main(String[] args) throws ParseException {
 
 		EmployeeDAO dao = EmployeeDAOFactory.getInstance();
-		EmployeeInfoBean empinf = new EmployeeInfoBean();
-		SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd"); 
-		Date date = null;
-		date = form.parse("1993-04-03");
-		empinf.setId(21);
-		empinf.setName("harryyyy");
-		empinf.setDepartmentId(103);
-		empinf.setDesignation("dev");
-		empinf.setDob(date);
-		empinf.setEmail("harryyyy@mail.com");
-		empinf.setGender("male");
-		empinf.setJoiningDate(date);
-		empinf.setManagerId(4);
-		empinf.setPhone(22222222);
-		empinf.setSalary(25000);
-		empinf.setAccountNumber(11111111);
-		empinf.setAge(25);
-		//dao.createEmployeeInfo(empinf);
-		dao.deleteEmployeeInfo(21);
+		//EmployeeInfoBean empinf = new EmployeeInfoBean();
+		List<EmployeeInfoBean> beans = dao.getAllEmployeeInfo(); 
+		for(EmployeeInfoBean bean : beans) {
+		  printData(bean); 
+		  }
+		 
+		 
+		/*
+		 * SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd"); Date date = null;
+		 * date = form.parse("1993-04-03"); empinf.setId(21);
+		 * empinf.setName("harryyyy"); empinf.setDepartmentId(103);
+		 * empinf.setDesignation("dev"); empinf.setDob(date);
+		 * empinf.setEmail("harryyyy@mail.com"); empinf.setGender("male");
+		 * empinf.setJoiningDate(date); empinf.setManagerId(4);
+		 * empinf.setPhone(22222222); empinf.setSalary(25000);
+		 * empinf.setAccountNumber(11111111); empinf.setAge(25);
+		 * //dao.createEmployeeInfo(empinf); dao.deleteEmployeeInfo(21);
+		 */
 		
 		
 		

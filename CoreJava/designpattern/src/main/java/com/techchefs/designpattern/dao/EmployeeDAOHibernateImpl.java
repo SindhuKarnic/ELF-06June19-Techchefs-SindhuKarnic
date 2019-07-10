@@ -4,20 +4,26 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import com.techchefs.designpattern.beans.EmployeeInfoBean;
+import com.techchefs.designpattern.util.HibernateUtil;
 
 public class EmployeeDAOHibernateImpl implements EmployeeDAO{
 
 	@Override
-	public ArrayList<EmployeeInfoBean> getAllEmployeeInfo() {
-		//TO DO
-		return null;
+	public List<EmployeeInfoBean> getAllEmployeeInfo() {
+		Session session = HibernateUtil.openSession();
+		String hql = "from EmployeeInfoBean"; 
+		Query query = session.createQuery(hql);
+		List<EmployeeInfoBean> employeeInfoBeans = query.list(); 
+		return employeeInfoBeans;
 	}
 
 	@Override
@@ -58,6 +64,30 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO{
 		//5) Close session
 		session.close();
 		return empinf;
+	}
+
+	@Override
+	public boolean createEmployeeInfo(EmployeeInfoBean bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateEmployeeInfo(EmployeeInfoBean bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteEmployeeInfo(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteEmployeeInfo(String id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
