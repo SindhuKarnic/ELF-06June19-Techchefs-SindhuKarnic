@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Images</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+    <style>
+        .imgheight {
+            height: 200px;
+            width: 200px;
+        }
+        .margin-for-element {
+            margin-top: 200px;
+            margin-left: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="padding-top: 30px;">
+        <div class="row">
+            <div class="col-3" onmouseover="showImages()" onmouseout="hideImages()">
+                <img class="imgheight" src="https://cdn.pixabay.com/photo/2017/05/11/11/15/workplace-2303851__340.jpg"/>
+            </div>
+            <div class="col-3" id="im2">
+                    <img class="imgheight" src="https://cdn.pixabay.com/photo/2016/03/26/13/09/cup-of-coffee-1280537__340.jpg"/>
+            </div>
+            <div class="col-3" id="im3">
+                    <img class="imgheight" src="https://cdn.pixabay.com/photo/2014/05/02/21/50/home-office-336378__340.jpg"/>
+            </div>
+            <div class="col-3" id="im4">
+                    <img class="imgheight" src="https://cdn.pixabay.com/photo/2016/11/29/08/41/apple-1868496__340.jpg"/>
+            </div>
+        </div>
+    </div>
+    <script src = "FourImage.js"></script>
+</body>
+</html>

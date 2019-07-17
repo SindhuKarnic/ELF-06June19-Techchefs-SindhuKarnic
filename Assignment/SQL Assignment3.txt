@@ -20,12 +20,12 @@
 
 5.WAQ to display the minimum salary for each job excluding all the emp whose name ends with 's'.
 	
- select max(salary) from employee group by job where fname not like '%s';	
+ select min(salary) from employee group by job where fname not like '%s';	
 
 
 6.WAQ to display the list of emp who is working in 'admin' dept.
 
- select * from employee e where e.deptno=(select d.deptno from department where dname='admin');
+ select * from employee e where e.deptno=(select d.deptno from department d where dname='admin');
 
 
 7.WAQ to display the list of the dept names that are working in as software developer.
