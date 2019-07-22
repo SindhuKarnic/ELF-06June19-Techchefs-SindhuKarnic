@@ -1,0 +1,11 @@
+.movie-container {
+    padding-top: 5%;
+    padding-left: 40%;
+}
+.title-style {
+    margin-top: 10px;
+    font-weight: bold;
+}
+.movie-display {
+    margin-top:10px;
+}
