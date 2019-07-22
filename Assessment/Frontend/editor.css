@@ -1,0 +1,13 @@
+.container-position {
+    padding: 5%;
+}
+.frame-style {
+    width:100%;
+    border:1px solid gray;
+    height:250px;
+}
+.text-style {
+    width:100%;
+    height:250px;
+    border:1px solid gray;
+}
