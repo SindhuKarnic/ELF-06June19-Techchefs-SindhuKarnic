@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="messageBean" class="com.techchefs.springcore.beans.MessageBean">
+		<property name="message" value="hello spring"></property>
+	</bean>
+	
+<!-- 	<bean id="emp" class="com.techchefs.springcore.beans.Employee" scope="prototype"> -->
+<!-- 		<property name="name" value="sindhu"></property> -->
+<!-- 		<property name="id" value="1"></property> -->
+<!-- <bean id="emp" class="com.techchefs.springcore.beans.Employee" scope="prototype" init-method="afterPropertiesSet" destroy-method="destroy" > -->
+<!-- 	</bean> -->
+
+
+<!-- Wiring -->
+<!-- 		<bean id="emp" class="com.techchefs.springcore.beans.Employee" scope="prototype"> -->
+<!-- 			<property name="name" value="admin"></property> -->
+<!-- 			<property name="id" value="1"></property> -->
+<!-- 			<property name="deptbean" ref="dept"></property> -->
+<!-- 		</bean> -->
+<!-- 		<bean id="dept" class="com.techchefs.springcore.beans.DeptBean"> -->
+<!-- 			<property name="deptName" value="IT"></property> -->
+<!-- 			<property name="deptId" value="10"></property> -->
+<!-- 		</bean> -->
+
+
+<!-- Auto Wiring by name-->
+<!-- 	<bean id="emp" class="com.techchefs.springcore.beans.Employee" scope="prototype" autowire="byName"> -->
+<!-- 			<property name="name" value="admin"></property> -->
+<!-- 			<property name="id" value="1"></property> -->
+<!-- 		</bean> -->
+ <!-- 		 bean id name should be same as ref object in emp class --> 
+<!-- 		<bean id="deptbean" class="com.techchefs.springcore.beans.DeptBean"> -->
+<!-- 			<property name="deptName" value="IT"></property> -->
+<!-- 			<property name="deptId" value="10"></property> -->
+<!-- 		</bean> -->
+		
+		
+<!-- Auto Wiring by type-->
+<!-- 	<bean id="emp" class="com.techchefs.springcore.beans.Employee" scope="prototype" autowire="byType"> -->
+<!-- 			<property name="name" value="admin"></property> -->
+<!-- 			<property name="id" value="1"></property> -->
+<!-- 		</bean> -->
+
+<!-- 		<bean id="dept" class="com.techchefs.springcore.beans.DeptBean"> -->
+<!-- 			<property name="deptName" value="IT"></property> -->
+<!-- 			<property name="deptId" value="10"></property> -->
+<!-- 		</bean> -->
+		
+<!-- Auto wire testing autowire-candidate and primary-->
+<!-- 	<bean id="emp" class="com.techchefs.springcore.beans.Employee" scope="prototype" autowire="byType"> -->
+<!-- 			<property name="name" value="admin"></property> -->
+<!-- 			<property name="id" value="1"></property> -->
+<!-- 		</bean> -->
+
+<!-- 		<bean id="dev" class="com.techchefs.springcore.beans.DeptBean" primary="true"> -->
+<!-- 			<property name="deptName" value="dev"></property> -->
+<!-- 			<property name="deptId" value="9"></property> -->
+<!-- 		</bean> -->
+<!-- 		<bean id="testing" class="com.techchefs.springcore.beans.DeptBean"> -->
+<!-- 			<property name="deptName" value="testing"></property> -->
+<!-- 			<property name="deptId" value="10"></property> -->
+<!-- 		</bean> -->
+<!-- 		<bean id="hr" class="com.techchefs.springcore.beans.DeptBean" autowire-candidate="false"> -->
+<!-- 			<property name="deptName" value="hr"></property> -->
+<!-- 			<property name="deptId" value="11"></property> -->
+<!-- 		</bean> -->
+		
+	<!-- Auto wire with constructor-->	
+		<bean id="emp" class="com.techchefs.springcore.beans.Employee" scope="prototype" autowire="constructor">
+			<constructor-arg name="name" value="admin"></constructor-arg>
+			<constructor-arg name="id" value="1"></constructor-arg>
+		</bean>
+
+		<bean id="dev" class="com.techchefs.springcore.beans.DeptBean" primary="true">
+			<property name="deptName" value="dev"></property>
+			<property name="deptId" value="9"></property>
+		</bean>
+
+</beans>
