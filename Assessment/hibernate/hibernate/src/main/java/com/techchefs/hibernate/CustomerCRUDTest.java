@@ -5,7 +5,7 @@ import com.techchefs.hibernate.dao.CustomerDao;
 import com.techchefs.hibernate.dto.CustomerBean;
 
 import lombok.extern.java.Log;
-
+//Question 1. Create a Table with Following Details (Using Hibernate Annotations) and perform the CRUD operation on it.
 @Log
 public class CustomerCRUDTest {
 
