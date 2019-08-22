@@ -1,0 +1,33 @@
+.add-user {
+    color: black !important;
+    font-weight: 600;
+    font-size: 22px;
+    float: right;
+    top: 20%;
+    right: 10%;
+    position: fixed;
+    text-decoration: underline;
+}
+.user-details {
+    margin-top: 5%;
+    padding: 5%;
+    margin-left: 20%;
+}
+th {
+    font-size: 25px;
+}
+td {
+    font-size: 23px;
+}
+.user-name {
+    padding: 5px;
+    width: 75%;
+}
+.user-action {
+    width: 15%;
+    color: black !important;
+}
+.user-update {
+    color: black !important;
+    text-decoration: underline;
+}

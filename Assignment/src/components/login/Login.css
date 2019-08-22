@@ -1,0 +1,17 @@
+.bg-image{
+    background-image: url("../../assets/library.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    height:400px;
+
+}
+.submit-button {
+    background-color: blanchedalmond;
+  
+    color: black;
+    font-weight: 600;
+}
+.input-width {
+    width: 40%;
+}
+
