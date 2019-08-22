@@ -5,17 +5,18 @@ import {Button} from 'react-bootstrap'
 import Login from '../login/Login'
 import './HomePage.css'
 import './CreateUser.css'
+import Axios from 'axios'
 
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 class CreateUser extends Component {
     constructor(props) {
         super(props)
         this.state = {
-           id:'',
-           name:'',
+           userId:'',
+           userName:'',
            password:'',
            address:'',
-           phone:'',
+           phoneNo:'',
            email:'',
            userType:'',
            isUpdate: false
@@ -26,24 +27,25 @@ class CreateUser extends Component {
         let data = this.props.location.data;
        
         this.setState({
-            id: data && data.userId ? data.userId : '',
-           name: data && data.userName ? data.userName : '',
+            userId: data && data.userId ? data.userId : '',
+            userName: data && data.userName ? data.userName : '',
            password:data && data.password ? data.password : '',
            address:data && data.address ? data.address : '',
-           phone:data && data.phoneNo ? data.phoneNo : '',
+           phoneNo:data && data.phoneNo ? data.phoneNo : '',
            email:data && data.email ? data.email : '',
            userType:data && data.userId ? data.userType : '',
            isUpdate: data ? true : false
         })
        
     }
-    create() {
+    create(e) {
+        e.preventDefault();
         if(this.state.isUpdate) {
             Axios.put('http://localhost/library/updateUser', this.state)
             .then((response)=>{
                 console.log(response.data.message)
                if(response.data.statusCode === 201) {
-                this.props.history.push('/')
+                this.props.history.push('/adminhome')
                    
                } else if(response.data.statusCode === 501){
                 //this.props.history.push('/')
@@ -61,7 +63,7 @@ class CreateUser extends Component {
             .then((response)=>{
                 console.log(response.data.message)
                if(response.data.statusCode === 201) {
-                this.props.history.push('/')
+                this.props.history.push('/adminhome')
                    
                } else if(response.data.statusCode === 501){
                 //this.props.history.push('/')
@@ -88,16 +90,16 @@ class CreateUser extends Component {
                     <Form.Group controlId="formBasicEmail">
                         <Form.Control className="input-width" type="text" placeholder="User Id" onChange={(event)=>{
                             this.setState({
-                                id:event.target.value
+                                userId:event.target.value
                             })
-                            }} value={this.state.id} />
+                            }} value={this.state.userId} />
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Control className="input-width" type="text" placeholder="User Name" onChange={(event)=>{
                             this.setState({
-                                name:event.target.value
+                                userName:event.target.value
                             })
-                            }} value={this.state.name} />
+                            }} value={this.state.userName} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
@@ -109,28 +111,28 @@ class CreateUser extends Component {
                         }} value={this.state.password} />
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Control className="input-width" type="text" placeholder="User Id" onChange={(event)=>{
+                        <Form.Control className="input-width" type="text" placeholder="Address" onChange={(event)=>{
                             this.setState({
                                 address:event.target.value
                             })
                             }} value={this.state.address} />
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Control className="input-width" type="number" placeholder="User Id" onChange={(event)=>{
+                        <Form.Control className="input-width" type="number" placeholder="Phone No" onChange={(event)=>{
                             this.setState({
-                                phone:event.target.value
+                                phoneNo:event.target.value
                             })
-                            }} value={this.state.phone} />
+                            }} value={this.state.phoneNo} />
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Control className="input-width" type="email" placeholder="User Id" onChange={(event)=>{
+                        <Form.Control className="input-width" type="email" placeholder="Email Id" onChange={(event)=>{
                             this.setState({
                                 email:event.target.value
                             })
                             }} value={this.state.email} />
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Control className="input-width" type="text" placeholder="User Id" onChange={(event)=>{
+                        <Form.Control className="input-width" type="text" placeholder="User Type" onChange={(event)=>{
                             this.setState({
                                 userType:event.target.value
                             })

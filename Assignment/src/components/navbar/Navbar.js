@@ -10,20 +10,36 @@ import './Navbar.css'
 export class Navbar extends Component {
     constructor(props) {
         super(props)
-       
+        this.state = {
+            path:''
+        }
+      
     }
+    
     logout() {
         Axios.get('http://localhost/login/logoutsubmit')
         .then((response)=>{
             console.log(response.data.message)
            if(response.data.message === 'Success') {
+               sessionStorage.removeItem('userId');
+               sessionStorage.removeItem('userType')
                this.props.history.push('/')
            }
         }).catch((error)=>{
             console.log(error)
         })
     }
-
+    redirect()
+ {
+    
+        let p = sessionStorage.getItem('userType');
+        if(p === 'admin') {
+            this.props.history.push('/adminhome');
+        } else if(p === 'user') {
+            this.props.history.push('/userhome');
+        }
+ 
+ }
     render() {
         return (
             <div>
@@ -41,7 +57,7 @@ export class Navbar extends Component {
                                         </Form>
                                     </li>
                                     <li class="nav-item active heading">
-                                        <h2 className="heading-color">Library Management System</h2>                                                                                        
+                                       <h2 onClick={this.redirect.bind(this)} className="heading-color">Library Management System</h2>                                                                                     
                                     </li>     
                                     <li class="nav-item">
                                         <Button variant="light" className="logout heading-color" onClick={this.logout.bind(this)}>Logout</Button>    
