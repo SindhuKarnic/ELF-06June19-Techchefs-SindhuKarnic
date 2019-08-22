@@ -62,35 +62,38 @@ export class Login extends Component {
         render() {
             return (
                 <div className="bg-image">
-                     <div className="container" style={{marginTop:'13%', marginLeft:'20%'}}>
-                        <Form style={{paddingTop:'12%',paddingLeft:'29%'}}>
-                            <Form.Group controlId="formBasicEmail">
-                                
-                                <Form.Control className="input-width" type="email" placeholder="Enter Id" onChange={(event)=>{
-                                    this.setState({
-                                        email:event.target.value
-                                    })
-                                    }} value={this.state.email} />
-                            </Form.Group>
+                     <div className="container" style={{ marginLeft:'31%'}}>
+                        <div className="login-card">
+                            <Form className="form-width">
+                                <Form.Group controlId="formBasicEmail">
+                                    
+                                    <Form.Control className="input-width" type="email" placeholder="Enter Id" onChange={(event)=>{
+                                        this.setState({
+                                            email:event.target.value
+                                        })
+                                        }} value={this.state.email} />
+                                </Form.Group>
 
-                            <Form.Group controlId="formBasicPassword">
-                               
-                                <Form.Control  className="input-width" type="password" placeholder="Password" onChange={(event)=>{
-                                    this.setState({
-                                        password:event.target.value
-                                    })
-                                }} value={this.state.password} />
-                            </Form.Group>
+                                <Form.Group controlId="formBasicPassword">
+                                
+                                    <Form.Control  className="input-width" type="password" placeholder="Password" onChange={(event)=>{
+                                        this.setState({
+                                            password:event.target.value
+                                        })
+                                    }} value={this.state.password} />
+                                </Form.Group>
+                                
+                                <Button className="submit-button" variant="primary" type="submit" onClick={this.login.bind(this)}>
+                                    Submit
+                                </Button>
+                            </Form>
                             
-                            <Button className="submit-button" variant="primary" type="submit" onClick={this.login.bind(this)}>
-                                Submit
-                            </Button>
-                        </Form>
-                        <div style={{marginTop:'1%',paddingLeft:'29%'}}>
-                            
-                            <Button variant="primary" type="submit" className="submit-button">
-                                Forgot Password
-                            </Button>
+                            <div style={{marginTop:'1%',paddingLeft:'9%', paddingBottom:'9%'}}>
+                                
+                                <Button variant="primary" type="submit" className="submit-button">
+                                    Forgot Password
+                                </Button>
+                            </div>
                         </div>
                         <p ref={this.pRef} style={{color:'red', visibility:'hidden'}}>{this.error}</p>
                     

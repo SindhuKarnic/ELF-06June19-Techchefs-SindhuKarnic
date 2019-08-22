@@ -6,6 +6,7 @@ import Login from '../login/Login'
 import './HomePage.css'
 import './CreateUser.css'
 import Axios from 'axios'
+import Alert from 'react-bootstrap/Alert'
 
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 class CreateUser extends Component {
@@ -19,7 +20,8 @@ class CreateUser extends Component {
            phoneNo:'',
            email:'',
            userType:'',
-           isUpdate: false
+           isUpdate: false,
+           isSuccess: false
            
         }
     }
@@ -35,6 +37,7 @@ class CreateUser extends Component {
            email:data && data.email ? data.email : '',
            userType:data && data.userId ? data.userType : '',
            isUpdate: data ? true : false
+           
         })
        
     }
@@ -45,7 +48,11 @@ class CreateUser extends Component {
             .then((response)=>{
                 console.log(response.data.message)
                if(response.data.statusCode === 201) {
-                this.props.history.push('/adminhome')
+                   this.setState({
+                    isSuccess: true
+                   })
+                   setTimeout(() => {this.props.history.push('/adminhome')},3000)
+                //this.props.history.push('/adminhome')
                    
                } else if(response.data.statusCode === 501){
                 //this.props.history.push('/')
@@ -63,8 +70,11 @@ class CreateUser extends Component {
             .then((response)=>{
                 console.log(response.data.message)
                if(response.data.statusCode === 201) {
-                this.props.history.push('/adminhome')
-                   
+               // this.props.history.push('/adminhome')
+               this.setState({
+                isSuccess: true
+               })
+               setTimeout(() => {this.props.history.push('/adminhome')},3000)
                } else if(response.data.statusCode === 501){
                 //this.props.history.push('/')
                    
@@ -84,6 +94,7 @@ class CreateUser extends Component {
        return (
             <div>
                 <Navbar/>
+                
                 <h2 className="header-pos">Add user Details</h2>
                 <div className="add-det">
                 <Form>
@@ -143,6 +154,12 @@ class CreateUser extends Component {
                     </Button>
                 </Form>
                 </div>
+                {
+                    this.state.isSuccess && 
+                    <Alert className="alert-position" variant="success" onClose={() => this.setState({isSuccess: false})} dismissible>
+                        User added successfully
+                    </Alert>
+                }
             </div>
         )
     }

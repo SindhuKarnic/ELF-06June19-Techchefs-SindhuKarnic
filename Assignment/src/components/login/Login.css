@@ -1,8 +1,9 @@
 .bg-image{
-    background-image: url("../../assets/library.jpg");
+     background-image: url("../../assets/libri.jpg");
     background-repeat: no-repeat;
     background-size:cover;
-    height:400px;
+    background-position:center;
+    height: 876px; 
 
 }
 .submit-button {
@@ -13,5 +14,18 @@
 }
 .input-width {
     width: 40%;
+}
+
+.login-card {
+    border: 1px solid black; 
+    margin-top: 25%;
+    height: 49%;
+    width: 52%;
+    background-color: rgb(0,0,0,0.5);
+}
+.form-width {
+    padding-top: 9%;
+    padding-left: 9%;
+    width: 208%;
 }
 

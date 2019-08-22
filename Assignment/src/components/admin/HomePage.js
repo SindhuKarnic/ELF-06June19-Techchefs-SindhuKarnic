@@ -24,9 +24,9 @@ class AdminHome extends Component {
             console.log(response.data.message)
            if(response.data.statusCode === 201) {
                  //setstate
-                 let userData = response.data.beans.filter(item => item.userType !== 'admin')
+               let userData = response.data.beans.filter(item => item.userType !== 'admin')
                this.setState({
-                   user: response.data.beans
+                   user: userData
                })
                 // if(response.data.beans[0].userType === "admin") {
                 //     this.props.history.push('/adminhome')
