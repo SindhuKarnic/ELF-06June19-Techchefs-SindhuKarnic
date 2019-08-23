@@ -21,7 +21,8 @@ class CreateUser extends Component {
            email:'',
            userType:'',
            isUpdate: false,
-           isSuccess: false
+           isSuccess: false,
+           isNotValid: false
            
         }
     }
@@ -43,6 +44,12 @@ class CreateUser extends Component {
     }
     create(e) {
         e.preventDefault();
+        if(this.state.userId !== '' && this.state.password !== '' && this.state.email !== ''&& this.state.userType !== '') {
+            this.setState({
+               
+                isNotValid: false
+               })
+        
         if(this.state.isUpdate) {
             Axios.put('http://localhost/library/updateUser', this.state)
             .then((response)=>{
@@ -50,6 +57,7 @@ class CreateUser extends Component {
                if(response.data.statusCode === 201) {
                    this.setState({
                     isSuccess: true
+                   
                    })
                    setTimeout(() => {this.props.history.push('/adminhome')},3000)
                 //this.props.history.push('/adminhome')
@@ -87,6 +95,12 @@ class CreateUser extends Component {
             })
           
         }
+    } else {
+        this.setState({
+               
+            isNotValid: true
+           })
+    }
         //api call to delete
         // setstate
     }
@@ -94,72 +108,80 @@ class CreateUser extends Component {
        return (
             <div>
                 <Navbar/>
-                
-                <h2 className="header-pos">Add user Details</h2>
-                <div className="add-det">
-                <Form>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Control className="input-width" type="text" placeholder="User Id" onChange={(event)=>{
-                            this.setState({
-                                userId:event.target.value
-                            })
-                            }} value={this.state.userId} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Control className="input-width" type="text" placeholder="User Name" onChange={(event)=>{
-                            this.setState({
-                                userName:event.target.value
-                            })
-                            }} value={this.state.userName} />
-                    </Form.Group>
+                <div className="user-card">
+                    <h2 className="header-pos">Add user Details</h2>
+                    <div className="add-det">
+                    <Form style={{paddingBottom: '3%'}}>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Control className="input-width" type="text" placeholder="User Id" required onChange={(event)=>{
+                                this.setState({
+                                    userId:event.target.value
+                                })
+                                }} value={this.state.userId} />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Control className="input-width" type="text" placeholder="User Name" onChange={(event)=>{
+                                this.setState({
+                                    userName:event.target.value
+                                })
+                                }} value={this.state.userName} />
+                        </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
-                        
-                        <Form.Control  className="input-width" type="password" placeholder="Password" onChange={(event)=>{
-                            this.setState({
-                                password:event.target.value
-                            })
-                        }} value={this.state.password} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Control className="input-width" type="text" placeholder="Address" onChange={(event)=>{
-                            this.setState({
-                                address:event.target.value
-                            })
-                            }} value={this.state.address} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Control className="input-width" type="number" placeholder="Phone No" onChange={(event)=>{
-                            this.setState({
-                                phoneNo:event.target.value
-                            })
-                            }} value={this.state.phoneNo} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Control className="input-width" type="email" placeholder="Email Id" onChange={(event)=>{
-                            this.setState({
-                                email:event.target.value
-                            })
-                            }} value={this.state.email} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Control className="input-width" type="text" placeholder="User Type" onChange={(event)=>{
-                            this.setState({
-                                userType:event.target.value
-                            })
-                            }} value={this.state.userType} />
-                    </Form.Group>
-                    <Button className="submit-button" variant="primary" type="submit" onClick={this.create.bind(this)}>
-                        Submit
-                    </Button>
-                </Form>
+                        <Form.Group controlId="formBasicPassword">
+                            
+                            <Form.Control  className="input-width" type="password" placeholder="Password" required onChange={(event)=>{
+                                this.setState({
+                                    password:event.target.value
+                                })
+                            }} value={this.state.password} />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Control className="input-width" type="text" placeholder="Address" onChange={(event)=>{
+                                this.setState({
+                                    address:event.target.value
+                                })
+                                }} value={this.state.address} />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Control className="input-width" type="number" placeholder="Phone No" onChange={(event)=>{
+                                this.setState({
+                                    phoneNo:event.target.value
+                                })
+                                }} value={this.state.phoneNo} />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Control className="input-width" type="email" placeholder="Email Id" required onChange={(event)=>{
+                                this.setState({
+                                    email:event.target.value
+                                })
+                                }} value={this.state.email} />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Control className="input-width" type="text" placeholder="User Type" onChange={(event)=>{
+                                this.setState({
+                                    userType:event.target.value
+                                })
+                                }} value={this.state.userType} />
+                        </Form.Group>
+                        <Button className="submit-button" variant="primary" type="submit" onClick={this.create.bind(this)}>
+                            Submit
+                        </Button>
+                    </Form>
+                    </div>
+                   
                 </div>
                 {
-                    this.state.isSuccess && 
-                    <Alert className="alert-position" variant="success" onClose={() => this.setState({isSuccess: false})} dismissible>
-                        User added successfully
-                    </Alert>
-                }
+                        this.state.isSuccess && 
+                        <Alert className="alert-position" variant="success" onClose={() => this.setState({isSuccess: false})} dismissible>
+                            User added successfully
+                        </Alert>
+                    }
+                     {
+                        this.state.isNotValid && 
+                        <Alert className="alert-position" variant="danger" onClose={() => this.setState({isSuccess: false})} dismissible>
+                            Add user details
+                        </Alert>
+                    }
             </div>
         )
     }

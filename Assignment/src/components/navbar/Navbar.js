@@ -11,7 +11,8 @@ export class Navbar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            path:''
+            path:'',
+            searchedId: ''
         }
       
     }
@@ -30,7 +31,7 @@ export class Navbar extends Component {
         })
     }
     redirect()
- {
+    {
     
         let p = sessionStorage.getItem('userType');
         if(p === 'admin') {
@@ -39,7 +40,20 @@ export class Navbar extends Component {
             this.props.history.push('/userhome');
         }
  
- }
+    }
+    search(e) {
+        if(e.key === 'Enter') {
+            e.preventDefault();
+            //this.props.location.search = this.state.searchedId;
+            this.props.history.push({
+                pathname: '/adminsearch',
+                data: this.state.searchedId
+               
+              })
+           // this.props.history.push('/adminsearch');
+        }
+        
+    }
     render() {
         return (
             <div>
@@ -51,9 +65,13 @@ export class Navbar extends Component {
                                 <ul class="navbar-nav mr-auto container">
                                     <li class="nav-item active search">
                                         <Form>
-                                            <Form.Group controlId="formBasicEmail">
-                                                <Form.Control type="text" placeholder="Search"/>
-                                            </Form.Group>
+                                           
+                                                <Form.Control type="text" placeholder="Search by Id" onChange={(event)=>{
+                                this.setState({
+                                    searchedId:event.target.value
+                                })
+                                }} onKeyDown={this.search.bind(this)} value={this.state.searchedId}/>
+                                          
                                         </Form>
                                     </li>
                                     <li class="nav-item active heading">

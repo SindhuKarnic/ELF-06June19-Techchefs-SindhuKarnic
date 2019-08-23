@@ -6,6 +6,7 @@ import Navbar  from './components/navbar/Navbar'
 import AdminHome from './components/admin/HomePage'
 import user from './components/user/HomePage'
 import createuser from './components/admin/CreateUser'
+import adminsearch from  './components/admin/Search'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route  path='/adminhome' component={AdminHome}></Route>
           <Route  path='/userhome' component={user}></Route>
           <Route  path='/createuser' component={createuser}></Route>
+          <Route  path='/adminsearch' component={adminsearch}></Route>
         </Router>
      //<Login/>
     //<Navbar/>

@@ -1,0 +1,42 @@
+.add-user {
+    color: black !important;
+    font-weight: 600;
+    font-size: 22px;
+    float: right;
+    top: 20%;
+    right: 10%;
+    text-decoration: underline;
+    padding-right: 5%;
+    padding-top: 3%;
+}
+.user-details {
+    margin-top: 4%;
+    padding: 5%;
+}
+table {
+    margin-top: 5%;
+}
+th {
+    font-size: 25px;
+}
+td {
+    font-size: 23px;
+}
+.user-name {
+    padding: 5px;
+    width: 75%;
+}
+.user-action {
+    width: 15%;
+    color: black !important;
+}
+.user-update {
+    color: black !important;
+    text-decoration: underline;
+}
+.data-card {
+    background-color: rgb(210,231,249,0.8);
+    width: 55%;
+    margin-left: 23%;
+    margin-top: 7%;
+}

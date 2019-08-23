@@ -74,6 +74,7 @@ class AdminHome extends Component {
        return (
             <div>
                 <Navbar/>
+                <div className="data-card">
                 <Link className= "add-user" to="/createuser" >+Add User</Link>
                 <div className="user-details">
                     <table>
@@ -99,22 +100,9 @@ class AdminHome extends Component {
                                 )
                             }) 
                         } 
-                         {/* <tr>
-                                    <td className="user-name">
-                                       abc
-                                    </td>
-                                    <td className='user-action'>
-                                        <Link className="user-update" to={{
-                                                                            pathname: "/createuser",
-                                                                            data: {name:"abc",id:1} 
-                                                                        }}>Update</Link>  
-                                    </td>
-                                    <td className='user-action'>
-                                        {/* <Link onClick={() => this.delete(item.id)} className="user-update">Delete</Link> 
-                                    </td>
-                                </tr>   */}
-
+                       
                     </table>
+                </div>
                 </div>
             </div>
         )

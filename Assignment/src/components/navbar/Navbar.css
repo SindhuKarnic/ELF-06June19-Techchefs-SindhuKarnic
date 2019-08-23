@@ -28,3 +28,6 @@
 ul {
     width:100%;
 }
+.heading-color:hover {
+    cursor: pointer;
+}

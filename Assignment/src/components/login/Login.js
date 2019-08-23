@@ -4,6 +4,7 @@ import {Button} from 'react-bootstrap'
 import './Login.css'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Axios from 'axios'
+import Alert from 'react-bootstrap/Alert'
 
 export class Login extends Component {
     constructor(props) {
@@ -12,7 +13,8 @@ export class Login extends Component {
         this.state = {
             email:'',         
             password:'',
-            userType: 'admin'
+            userType: 'admin',
+            showAlert: false
         }
         this.pRef = React.createRef();
         this.error = "Login failed"
@@ -20,45 +22,45 @@ export class Login extends Component {
     }
     login(event) {
         event.preventDefault();
-        // if(this.state.userType === "admin") {
-        //         this.props.history.push('/adminhome')
-        //     } else if(this.state.userType === "user") {
-        //         this.props.history.push('/userhome')
-        //     } else {
-        //         //this.props.history.push('/home')
-        //     }
-
-        Axios.post('http://localhost/login/loginPage',null,
-        //Axios.post('http://10.10.13.101/login/loginPage',null,
-        {
-            params: {
-                email: this.state.email,
-                password:this.state.password
-            }
-       }
-        ).then((response)=>{
-            console.log(response.data.message)
-           if(response.data.message === 'Success') {
-                sessionStorage.setItem('userId', response.data.beans[0].userId);
-                sessionStorage.setItem('userType', response.data.beans[0].userType);
-                if(response.data.beans[0].userType === "admin") {
-                    this.props.history.push('/adminhome')
-                } else if(response.data.beans[0].userType === "user") {
-                    this.props.history.push('/user')
-                } else {
-                    //this.props.history.push('/home')
+        if(this.state.email.trim() !== "" && this.state.password.trim() !== "") {
+            Axios.post('http://localhost/login/loginPage',null,
+            {
+                params: {
+                    email: this.state.email,
+                    password:this.state.password
                 }
+        }
+            ).then((response)=>{
+                console.log(response.data.message)
+            if(response.data.message === 'Success') {
+                    sessionStorage.setItem('userId', response.data.beans[0].userId);
+                    sessionStorage.setItem('userType', response.data.beans[0].userType);
+                    if(response.data.beans[0].userType === "admin") {
+                        this.props.history.push('/adminhome')
+                    } else if(response.data.beans[0].userType === "user") {
+                        this.props.history.push('/user')
+                    } else {
+                        //this.props.history.push('/home')
+                    }
 
+                    this.setState({
+                        showAlert: false
+                    })
                 
-              
-           } else {
-                this.pRef.current.style.visibility = "visible"
-           }
-            
-        }).catch((error)=>{
-            console.log(error)
-        })
+            } else {
+                    this.pRef.current.style.visibility = "visible"
+            }
+                
+            }).catch((error)=>{
+                console.log(error)
+            })
+     } else {
+         this.setState({
+             showAlert: true
+         })
+     }
     }
+   
         render() {
             return (
                 <div className="bg-image">
@@ -67,7 +69,7 @@ export class Login extends Component {
                             <Form className="form-width">
                                 <Form.Group controlId="formBasicEmail">
                                     
-                                    <Form.Control className="input-width" type="email" placeholder="Enter Id" onChange={(event)=>{
+                                    <Form.Control className="input-width"  type="email" placeholder="Enter Id" onChange={(event)=>{
                                         this.setState({
                                             email:event.target.value
                                         })
@@ -76,7 +78,7 @@ export class Login extends Component {
 
                                 <Form.Group controlId="formBasicPassword">
                                 
-                                    <Form.Control  className="input-width" type="password" placeholder="Password" onChange={(event)=>{
+                                    <Form.Control  className="input-width"  type="password" placeholder="Password" onChange={(event)=>{
                                         this.setState({
                                             password:event.target.value
                                         })
@@ -96,7 +98,12 @@ export class Login extends Component {
                             </div>
                         </div>
                         <p ref={this.pRef} style={{color:'red', visibility:'hidden'}}>{this.error}</p>
-                    
+                                    {
+                                        this.state.showAlert && 
+                                        <Alert className="alert-position" variant="danger" onClose={() => this.setState({showAlert: false})} dismissible>
+                                                    Please provide valid credentials
+                                                </Alert>
+                                    }
                     </div>
                     
                 </div>

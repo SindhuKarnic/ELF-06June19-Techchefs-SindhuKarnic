@@ -1,0 +1,36 @@
+.bg-image{
+     background-image: url("../../assets/libri.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+    height: 876px; 
+
+}
+.submit-button {
+    background-color: blanchedalmond;
+  
+    color: black;
+    font-weight: 600;
+}
+.input-width {
+    width: 40%;
+}
+
+.login-card {
+    border: 1px solid black; 
+    margin-top: 25%;
+    height: 49%;
+    width: 52%;
+    background-color: rgb(0,0,0,0.5);
+}
+.form-width {
+    padding-top: 9%;
+    padding-left: 9%;
+    width: 208%;
+}
+.alert-position {
+    width: 20%;
+    margin-left: 35%;
+    margin-top:2%;
+
+}
