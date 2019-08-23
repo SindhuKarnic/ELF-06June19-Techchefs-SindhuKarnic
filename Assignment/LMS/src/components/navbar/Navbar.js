@@ -24,7 +24,7 @@ export class Navbar extends Component {
            if(response.data.message === 'Success') {
                sessionStorage.removeItem('userId');
                sessionStorage.removeItem('userType')
-               this.props.history.push('/')
+               this.props.history.push({pathname: '/', data: 'loggedout'})
            }
         }).catch((error)=>{
             console.log(error)

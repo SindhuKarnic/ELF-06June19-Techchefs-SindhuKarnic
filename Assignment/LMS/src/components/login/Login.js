@@ -14,11 +14,20 @@ export class Login extends Component {
             email:'',         
             password:'',
             userType: 'admin',
-            showAlert: false
+            showAlert: false,
+            isNotValid: false,
+            isLoggedOut: false
         }
         this.pRef = React.createRef();
-        this.error = "Login failed"
+        
       
+    }
+    componentDidMount() {
+        if(this.props.location.data === "loggedout") {
+            this.setState({
+                isLoggedOut: true
+            })
+        }
     }
     login(event) {
         event.preventDefault();
@@ -48,7 +57,9 @@ export class Login extends Component {
                     })
                 
             } else {
-                    this.pRef.current.style.visibility = "visible"
+                this.setState({
+                    isNotValid: true
+                }) 
             }
                 
             }).catch((error)=>{
@@ -65,6 +76,12 @@ export class Login extends Component {
             return (
                 <div className="bg-image">
                      <div className="container" style={{ marginLeft:'31%'}}>
+                     {
+                        this.state.isLoggedOut && 
+                        <Alert className="alert-position" variant="success" onClose={() => this.setState({isLoggedOut: false})} dismissible>
+                                  Logged out successfully
+                                </Alert>
+                                    }
                         <div className="login-card">
                             <Form className="form-width">
                                 <Form.Group controlId="formBasicEmail">
@@ -102,6 +119,12 @@ export class Login extends Component {
                                         this.state.showAlert && 
                                         <Alert className="alert-position" variant="danger" onClose={() => this.setState({showAlert: false})} dismissible>
                                                     Please provide valid credentials
+                                                </Alert>
+                                    }
+                                     {
+                                        this.state.isNotValid && 
+                                        <Alert className="alert-position" variant="danger" onClose={() => this.setState({isNotValid: false})} dismissible>
+                                                   Login Failed
                                                 </Alert>
                                     }
                     </div>

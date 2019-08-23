@@ -5,13 +5,15 @@ import {Button} from 'react-bootstrap'
 import Login from '../login/Login'
 import './HomePage.css'
 import Axios from 'axios'
+import Alert from 'react-bootstrap/Alert'
 
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 class AdminHome extends Component {
     constructor(props) {
         super(props)
         this.state = {
-           user: []
+           user: [],
+           isDelete: false
         }
         this.getUser = this.getUser.bind(this);
     }
@@ -54,6 +56,9 @@ class AdminHome extends Component {
         .then((response)=>{
             console.log(response.data.message)
            if(response.data.statusCode === 201) {
+               this.setState({
+                   isDelete: true
+               })
                  //setstate
                  this.getUser();
                
@@ -103,6 +108,12 @@ class AdminHome extends Component {
                        
                     </table>
                 </div>
+                {
+                        this.state.isDelete && 
+                        <Alert className="alert-position" variant="success" onClose={() => this.setState({isDelete: false})} dismissible>
+                            User deleted successfully
+                        </Alert>
+                    }
                 </div>
             </div>
         )
